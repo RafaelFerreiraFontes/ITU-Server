@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pm4ek.gcp.mongodb.net/CommentsDB?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@test.yvyek.mongodb.net/ecommerce?retryWrites=true&w=majority`, {
     useNewUrlParser: true, 
     useUnifiedTopology: true
 }).then(() => {
