@@ -8,7 +8,7 @@ const uri = process.env.DB_URI;
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(uri, {
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pm4ek.gcp.mongodb.net/CommentsDB?retryWrites=true&w=majority`, {
     useNewUrlParser: true, 
     useUnifiedTopology: true
 }).then(() => {
