@@ -26,14 +26,9 @@ productRoute.get("/:id", (req, res) => {
 
 // create one product
 productRoute.post("/", (req, res) => {
-    const {
-        title,
-        price,
-        quant,
-        image_url
-    } = req.body;
+    const products = req.body;
 
-    product.create({ title, price, quant, image_url })
+    product.create(products)
         .then(data => res.json({ message: "ok", data }))
         .catch(err => res.json({ message: "error"}));
 });
