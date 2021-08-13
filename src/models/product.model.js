@@ -2,26 +2,20 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema(
-{
-    title: 
-    {
+const productSchema = new Schema({
+    title: {
         type: String
     },
-    price:  
-    {
+    price: {
         type: Number
     },
-    quant: 
-    {
+    quant: {
         type: Number
     },
-    image_url: 
-    {
+    image_url: {
         type: String
     }
-}, 
-{
+}, {
     collection: 'product',
     versionKey: false
 });
