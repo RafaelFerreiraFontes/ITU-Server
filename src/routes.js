@@ -1,3 +1,4 @@
+const AdminController = require("./controllers/admin.controller");
 const ProductController = require("./controllers/product.controller");
 const UserController    = require("./controllers/user.controller");
 
@@ -28,6 +29,13 @@ const Routes = [{
     route: "/buy",
     controller: UserController,
     action: "buy"
+},
+// admin routes
+{
+    method: "post",
+    route: "/admin",
+    controller: AdminController,
+    action: "login"
 }];
 
 module.exports = Routes;
