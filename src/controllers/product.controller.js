@@ -21,11 +21,17 @@ class ProductController {
 
     // create one product
     save(req, res)  {
-        const products = req.body;
+        const { auth_token, products } = req.body;
 
-        product.create(products)
-            .then(data => res.json({ message: "ok", data }))
-            .catch(err => res.json({ message: "error"}));
+        if(auth_token == process.env.ADMINTOKEN) {
+            product.create(products)
+                .then(data => res.json({ message: "ok", data }))
+                .catch(err => res.json({ message: "error"}));
+
+            return res.status(201);
+        } 
+
+        return res.status(401);
     }
 
     // get one product by id
