@@ -12,6 +12,7 @@ class UserController {
             if(!data) {
                 // create user
                 user.create(userData).catch(err => res.json({ message: "erro"}));
+                return;
             }
 
             // verify productCart
@@ -33,9 +34,18 @@ class UserController {
 
                 if(outstock.length > 0) {
                     res.json({ message: "produtos sem estoque", products: outstock });
+                } else {
+                    productCart.forEach(async prod => {
+                        const prodStock = data.find(prodStock => prodStock._id == prod.id);
+                        await product.updateOne({ _id: prod.id }, { quant: prodStock.quant - prod.quant });
+                    });
+
+                    res.json({ message: "compra realizada" });
+                    // [o] remover do db (vulgo diminuir a coluna quant)
+                    // [ ] enviar email
+                    
                 }
 
-                res.json({ message: "compra realizada" });
             });
         });
     }
