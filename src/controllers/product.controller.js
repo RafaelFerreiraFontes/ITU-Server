@@ -23,20 +23,38 @@ class ProductController {
     async save(req, res)  {
         const { auth_token, products } = req.body;
 
+        console.log(auth_token, products);
+
         if(auth_token == process.env.ADMINTOKEN) {
             const p = await product.findOne({ title: products.title }).exec();
 
-            if(p) {
+            console.log(p);
+
+            if(p) 
+            {
                 product.updateOne({ _id: p._id }, {
                     price: products.price,
                     quant: p.quant + products.quant,
                     image_url: products.image_url
+                }, {}, (err, data) => {
+                    console.log(err);
+                    if(err)
+                        res.json({ message: "error"});
+                    else
+                        res.json({ message: "ok", data });
                 });
-            } else {
+
+                const p2 = await product.findOne({ title: products.title }).exec();
+
+                console.log(p2);
+            } else 
+            {
                 product.create(products)
                     .then(data => res.json({ message: "ok", data }))
                     .catch(err => res.json({ message: "error"}));
             }
+
+            console.log("201");
             return res.status(201);
         } 
 

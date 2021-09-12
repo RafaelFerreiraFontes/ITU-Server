@@ -10,7 +10,12 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}));
 
 mongoose.Promise = global.Promise;
 
@@ -24,7 +29,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@te
 
 Routes.forEach(route => {
     app[route.method](route.route, (req, res) => {
-        route.controller[route.action](req, res);
+        return route.controller[route.action](req, res);
     });
 });
 
