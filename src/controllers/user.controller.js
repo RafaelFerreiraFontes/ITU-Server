@@ -51,15 +51,12 @@ class UserController {
                     // [x/4] enviar email
                     
                     let transporter = nodemailer.createTransport({
-                        host: "smtp.gmail.com",
-                        port: 587,
-                        requireTLS: true,
-                        secure: false,
+                        host: "smtp.mailtrap.io",
+                        port: 2525,
                         auth: {
-                            type: "OAuth2",
-                            user: process.env.COMPANY_EMAIL,
-                            pass: process.env.COMPANY_EMAIL_PASS
-                        },
+                            user: "1409915999e9e9",
+                            pass: "e99a7dde5b7b6e"
+                          },
                     });
 
                     let message = {
