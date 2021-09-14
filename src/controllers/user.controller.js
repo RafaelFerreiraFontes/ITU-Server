@@ -56,6 +56,7 @@ class UserController {
                         requireTLS: true,
                         secure: false,
                         auth: {
+                            type: "OAuth2",
                             user: process.env.COMPANY_EMAIL,
                             pass: process.env.COMPANY_EMAIL_PASS
                         },
