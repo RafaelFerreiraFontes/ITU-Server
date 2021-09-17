@@ -51,16 +51,15 @@ class UserController {
                     // [x/4] enviar email
                     
                     let transporter = nodemailer.createTransport({
-                        host: "smtp.mailtrap.io",
-                        port: 2525,
+                        service: "gmail",
                         auth: {
-                            user: "1409915999e9e9",
-                            pass: "e99a7dde5b7b6e"
+                            user: process.env.COMPANY_EMAIL,
+                            pass:  process.env.COMPANY_EMAIL_PASS
                           },
                     });
 
                     let message = {
-                        from: "faltabrio@gmail.com",
+                        from: process.env.COMPANY_EMAIL,
                         to: userData.email,
                         subject: "ITU - Sua compra foi realizada com successo!",
                         text: `Parabéns ${userData.name}, pela sua nova aquisição. Nesse e-mail segue as instruções para acesso ao(s) jogo(s) comprado(s):\nO(s) jogo(s) e sua(s) respectiva(s) chave(s):\n${productCart.reduce((acum, elem) => acum + `${elem.title} - ${elem.id}\n`, "")}\nValor total: ${productCart.reduce((acum, elem) => acum + elem.quant * elem.price, 0)}\nO pagamento deverá ser feito via Pix na chave: 44a9b2ea-7460-4c9e-914a-fb4c3da57f0b.\nObrigado pela preferência e aproveite seus jogos.`
